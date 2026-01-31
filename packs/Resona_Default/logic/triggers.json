@@ -899,5 +899,25 @@
                 "text": "（里想奈正在快速阅读）这段内容太长了，请用简练、傲娇的语气帮我总结一下核心要点："
             }
         ]
+    },
+    {
+        "id": "hourly_chime",
+        "description": "整点和半点报时",
+        "logic": "AND",
+        "probability": 1.0,
+        "cooldown": 60,
+        "conditions": [
+            {
+                "type": "time_cron",
+                "minutes": [0, 30],
+                "description": "在第0分和第30分触发"
+            }
+        ],
+        "actions": [
+            {
+                "type": "query_llm",
+                "text": "（看了一下时间）现在是整点或者半点，请报时并提醒我喝水或者休息一下，语气要温柔一点："
+            }
+        ]
     }
 ]

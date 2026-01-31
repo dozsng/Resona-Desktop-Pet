@@ -215,6 +215,15 @@ class BehaviorMonitor(QThread):
         elif t == "date_match":
             d = m_date if m_date else datetime.now().strftime("%m-%d")
             res = d == c.get("date", "")
+        # === 新增：检测特定分钟数 (比如整点或半点) ===
+        elif t == "time_cron":
+            try:
+                curr_t = m_time if m_time else datetime.now().strftime("%H:%M")
+                current_minute = int(curr_t.split(":")[1])
+                res = current_minute in c.get("minutes", [])
+            except:
+                res = False
+        # ===============================================
         elif t == "time_range":
             try:
                 curr_t = m_time if m_time else datetime.now().strftime("%H:%M")
