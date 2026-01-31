@@ -98,7 +98,7 @@ resona_tts_*/
 # Config with secrets
 # =========================
 # Keep config.cfg template but warn about API keys
-# config.cfg  # Uncomment if you don't want to track config
+config.cfg  # Uncomment if you don't want to track config
 
 # =========================
 # Logs and temp files
@@ -148,3 +148,7 @@ build/
 .env
 .env.local
 *.local.cfg
+
+
+packs/**/models/**/*.pth
+packs/**/models/**/*.ckpt
