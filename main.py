@@ -398,6 +398,15 @@ class ApplicationController(QObject):
             log("[Main] Exit action triggered.")
             self.cleanup()
             QApplication.quit()
+        elif atype == "query_llm":
+            clipboard = QApplication.clipboard()
+            clip_text = clipboard.text()
+            prompt_prefix = action.get("text", "")
+            full_query = f"{prompt_prefix}\n{clip_text}"
+            log(f"[Action] Triggering LLM query: {full_query[:20]}...")
+            self.main_window.start_thinking()
+            asyncio.run_coroutine_threadsafe(self._query_llm(full_query), self._loop)
+
     def _handle_pack_change(self, pack_id: str):
         log(f"[Main] Switching pack to {pack_id}")
         self.main_window.hide()
