@@ -869,13 +869,16 @@
         "conditions": [
             {
                 "type": "clip_match",
-                "keywords": ["#翻译", "#translate"], 
+                "keywords": [
+                    "#翻译",
+                    "#translate"
+                ],
                 "description": "检测剪贴板是否包含关键词"
             }
         ],
         "actions": [
             {
-                "type": "query_llm", 
+                "type": "query_llm",
                 "text": "（里想奈看着剪贴板）请帮我把下面这段话翻译成中文，并用傲娇妹妹的语气评价一下原文："
             }
         ]
@@ -889,7 +892,10 @@
         "conditions": [
             {
                 "type": "clip_match",
-                "keywords": ["#总结", "#summary"],
+                "keywords": [
+                    "#总结",
+                    "#summary"
+                ],
                 "description": "检测剪贴板是否包含总结指令"
             }
         ],
@@ -898,19 +904,20 @@
                 "type": "query_llm",
                 "text": "（里想奈正在快速阅读）这段内容太长了，请用简练、傲娇的语气帮我总结一下核心要点："
             }
-        ]
+        ],
+        "enabled": true
     },
     {
         "id": "hourly_chime",
-        "description": "整点和半点报时",
+        "description": "整点报时(插件版)",
         "logic": "AND",
         "probability": 1.0,
         "cooldown": 60,
         "conditions": [
             {
-                "type": "time_cron",
-                "minutes": [0, 30],
-                "description": "在第0分和第30分触发"
+                "type": "plugin_status",
+                "plugin_id": "time_sensor_v1",
+                "description": "检测时间插件返回True"
             }
         ],
         "actions": [
@@ -918,6 +925,20 @@
                 "type": "query_llm",
                 "text": "（看了一下时间）现在是整点或者半点，请报时并提醒我喝水或者休息一下，语气要温柔一点："
             }
-        ]
+        ],
+        "max_triggers": 9999,
+        "enabled": true
+    },
+    {
+        "id": "new_trigger",
+        "enabled": false,
+        "description": "",
+        "logic": "AND",
+        "probability": 1.0,
+        "cooldown": 60,
+        "max_triggers": 9999,
+        "one_shot_per_pid": false,
+        "conditions": [],
+        "actions": []
     }
 ]
